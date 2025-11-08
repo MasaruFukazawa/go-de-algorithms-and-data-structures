@@ -5,7 +5,7 @@ import "math"
 func searchMinValue(nums []int) (int, bool) {
 
 	if len(nums) == 0 {
-		return math.MaxInt, false
+		return math.MaxInt, true
 	}
 
 	result := math.MaxInt
@@ -16,5 +16,5 @@ func searchMinValue(nums []int) (int, bool) {
 		}
 	}
 
-	return result, true
+	return result, false
 }
