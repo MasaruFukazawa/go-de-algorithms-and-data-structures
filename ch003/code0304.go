@@ -4,21 +4,28 @@ import "math"
 
 func searchMinValidPairSum(nums1 []int, nums2 []int, k int) (int, bool) {
 
-	sum_value := math.MaxInt
-	result := math.MaxInt
+	min_val := math.MaxInt
+	found := false
 
 	for _, num1 := range nums1 {
 		for _, num2 := range nums2 {
-			sum_value = num1 + num2
-			if sum_value >= k && sum_value < result {
-				result = sum_value
+			sum_value := num1 + num2
+			if sum_value >= k {
+				if !found {
+					min_val = sum_value
+					found = true
+				} else {
+					if sum_value < min_val {
+						min_val = sum_value
+					}
+				}
 			}
 		}
 	}
 
-	if result ==  math.MaxInt {
-		return math.MaxInt, true
+	if !found {
+		return math.MaxInt, true // No valid pair found
 	}
 
-	return result, false
+	return min_val, false
 }
