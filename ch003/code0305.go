@@ -1,6 +1,5 @@
 package main
 
-
 func subsetSumBitBruteForce(nums []int, k int) bool {
 	length := len(nums)
 

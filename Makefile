@@ -1,4 +1,4 @@
-.PHONY: help up down build restart logs shell clean ps
+.PHONY: help up down build restart logs shell clean ps fmt lint vet test check
 
 help: ## Show this help message
 	@echo 'Usage: make [target]'
@@ -47,3 +47,17 @@ stop: ## Stop containers without removing
 
 start: ## Start existing containers
 	docker-compose start
+
+fmt: ## Format Go code
+	docker-compose exec app go fmt ./...
+
+lint: ## Run golangci-lint
+	docker-compose exec app golangci-lint run ./...
+
+vet: ## Run go vet
+	docker-compose exec app go vet ./...
+
+test: ## Run tests
+	docker-compose exec app go test ./...
+
+check: fmt lint vet test ## Run fmt, lint, vet, and test
